@@ -13,12 +13,10 @@ import java.util.Random;
  * Controls the movement of the robot using a PID controller for each possible robot control.
  */
 public class Controller {
-    private static final double SENSITIVITY = .4;
-
     private final Robot robot;
     private final EnumMap<Control,PID> controls = new EnumMap<>(Control.class);
 
-    public Controller(Robot robot, Random random) {
+    public Controller(Robot robot) {
         this.robot = robot;
         Arrays.stream(Control.values()).forEach(c -> this.controls.put(c, new PID()));
     }

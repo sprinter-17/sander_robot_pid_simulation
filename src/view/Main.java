@@ -37,7 +37,7 @@ public class Main extends Application {
     private final Set<KeyCode> activeKeys = new HashSet<>();
     private final Random random = new Random();
     private final Model model = new Model(random, 800);
-    private final Controller controller = new Controller(model.getRobot(), random);
+    private final Controller controller = new Controller(model.getRobot());
     private final WorldCanvas canvas = new WorldCanvas(model);
     private final Slider jitterControl = new Slider(0.0, 10.0, 0.0);
     private final Slider sensorErrorControl = new Slider(0, .1, 0);

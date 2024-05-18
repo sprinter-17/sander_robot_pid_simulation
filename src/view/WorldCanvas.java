@@ -67,7 +67,7 @@ public class WorldCanvas extends Canvas {
     private void drawWheel(GraphicsContext gr, int wheel) {
         gr.rotate(120);
         drawAxle(gr);
-        drawTyre(gr, wheel);
+        drawTyre(gr);
         drawTreads(gr, wheel);
     }
 
@@ -77,7 +77,7 @@ public class WorldCanvas extends Canvas {
         gr.strokeLine(0, -ROBOT_SIZE / 2, 0, -AXLE_LENGTH);
     }
 
-    private void drawTyre(GraphicsContext gr, int wheel) {
+    private void drawTyre(GraphicsContext gr) {
         gr.setFill(Color.BLACK);
         gr.fillRoundRect(-WHEEL_LENGTH / 2, -AXLE_LENGTH - WHEEL_WIDTH, WHEEL_LENGTH, WHEEL_WIDTH, 2, 2);
     }
@@ -88,9 +88,9 @@ public class WorldCanvas extends Canvas {
         for (double angle = 0; angle < Math.PI; angle += .4) {
             double proportion = Math.cos(angle + wheelPositions.get(wheel)) / 2;
             double xPos = WHEEL_LENGTH * proportion;
-            gr.strokeLine(xPos, -AXLE_LENGTH - 2, xPos, -AXLE_LENGTH - WHEEL_WIDTH + 2);
+            gr.strokeLine(xPos, -AXLE_LENGTH - 4, xPos, -AXLE_LENGTH - WHEEL_WIDTH + 4);
             double velocity = model.getRobot().getMotorVelocity(wheel);
-            wheelPositions.compute(wheel, (_, rot) -> (rot + velocity / 150) % .4);
+            wheelPositions.put(wheel, (wheelPositions.get(wheel) + velocity / 150) % .4);
         }
     }
 
