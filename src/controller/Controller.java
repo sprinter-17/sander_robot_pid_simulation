@@ -1,20 +1,19 @@
 package controller;
 
 import model.Control;
+import model.Location;
 import model.Position;
 import model.Robot;
-import model.Location;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.Random;
 
 /*
  * Controls the movement of the robot using a PID controller for each possible robot control.
  */
 public class Controller {
     private final Robot robot;
-    private final EnumMap<Control,PID> controls = new EnumMap<>(Control.class);
+    private final EnumMap<Control, PID> controls = new EnumMap<>(Control.class);
 
     public Controller(Robot robot) {
         this.robot = robot;

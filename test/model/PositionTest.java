@@ -1,8 +1,8 @@
 package model;
 
 import org.assertj.core.data.Offset;
-import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PositionTest {
