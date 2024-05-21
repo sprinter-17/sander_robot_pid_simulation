@@ -10,7 +10,6 @@ import org.mockito.AdditionalMatchers;
 
 import java.util.OptionalDouble;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
