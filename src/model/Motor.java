@@ -1,9 +1,6 @@
 package model;
 
 public class Motor {
-    public static final double MAX_VELOCITY = 3.0;
-    public static final double ACCELERATION = 0.2;
-
     private final double angle;
     private double velocity = 0;
 
@@ -15,11 +12,11 @@ public class Motor {
         return angle;
     }
 
-    public void setVelocity(double velocity) {
+    public void setVelocity(double velocity, Parameters params) {
         if (velocity > this.velocity) {
-            this.velocity = Math.min(MAX_VELOCITY, Math.min(velocity, this.velocity + ACCELERATION));
+            this.velocity = Math.min(params.getMaxVelocity(), Math.min(velocity, this.velocity + params.getAcceleration()));
         } else if (velocity < this.velocity) {
-            this.velocity = Math.max(-MAX_VELOCITY, Math.max(velocity, this.velocity - ACCELERATION));
+            this.velocity = Math.max(-params.getMaxVelocity(), Math.max(velocity, this.velocity - params.getAcceleration()));
         }
     }
 

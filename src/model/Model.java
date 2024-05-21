@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 import java.util.Random;
 
 /*
@@ -7,33 +9,48 @@ import java.util.Random;
  */
 public class Model {
     private final Random random;
+    private final Parameters params;
     private final double worldSize;
     private final Robot robot;
     private final Target target;
-    private double jitter = 0.0;
+    private final Controller controller;
+
+    private boolean controllerActive = false;
     private Location robotLocation;
 
-    public Model(Random random, double worldSize) {
+    public Model(Random random, Parameters params, double worldSize) {
         Position centre = new Position(worldSize / 2, worldSize / 2);
         this.random = random;
+        this.params = params;
         this.worldSize = worldSize;
-        this.robot = new Robot();
+        this.robot = new Robot(params);
         this.robotLocation = new Location(centre, 0);
-        this.target = new Target(centre, worldSize / 3, -0.005);
+        this.target = new Target(centre, worldSize / 3);
+        this.controller = new Controller(robot);
     }
 
-    public void setJitter(double jitter) {
-        this.jitter = jitter;
-    }
-
-    public double getWorldSize() {
+    public double worldSize() {
         return worldSize;
     }
 
+    public void setControllerActive(boolean active) {
+        controllerActive = active;
+        robot.clearAllControls();
+        controller.resetPID();
+    }
+
+    public void toggleControllerActive() {
+        setControllerActive(!controllerActive);
+    }
+
     public void update() {
-        robotLocation = robotLocation.addError(random, jitter);
+        if (controllerActive) {
+            Location reading = robotLocation.addError(random, params.getJitter());
+            controller.control(reading, target.position());
+        }
+        robotLocation = robotLocation.addError(random, params.getJitter());
         robotLocation = robot.updateLocation(robotLocation, worldSize);
-        target.update();
+        target.update(params);
     }
 
     public Robot getRobot() {
@@ -46,5 +63,9 @@ public class Model {
 
     public Target getTarget() {
         return target;
+    }
+
+    public Controller controller() {
+        return controller;
     }
 }

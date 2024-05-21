@@ -3,18 +3,16 @@ package model;
 public class Target {
     private final Position centre;
     private final double radius;
-    private final double speed;
 
     private double angle = 0.0;
 
-    public Target(Position centre, double radius, double speed) {
+    public Target(Position centre, double radius) {
         this.centre = centre;
         this.radius = radius;
-        this.speed = speed;
     }
 
-    public void update() {
-        angle += speed;
+    public void update(Parameters params) {
+        angle += params.getTargetSpeed();
     }
 
     public Position position() {

@@ -19,8 +19,8 @@ public class WorldCanvas extends Canvas {
     private final Model model;
     private final Map<Integer, Double> wheelPositions = new HashMap<>();
 
-    public WorldCanvas(Model model) {
-        super(model.getWorldSize(), model.getWorldSize());
+    public WorldCanvas(Model model, double worldSize) {
+        super(worldSize, worldSize);
         this.model = model;
         IntStream.range(0, 3).forEach(wheel -> wheelPositions.put(wheel, 0.0));
         draw();

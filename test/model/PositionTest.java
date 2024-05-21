@@ -22,12 +22,4 @@ class PositionTest {
         assertThat(result.x()).isCloseTo(expected.x(), TOL);
         assertThat(result.y()).isCloseTo(expected.y(), TOL);
     }
-//
-//    @Test
-//    public void testLimit() {
-//        Position position = new Position(50, 50);
-//        assertThat(position.limit(40, 60)).isEqualTo(new Position(50, 50));
-//        assertThat(position.limit(55, 60)).isEqualTo(new Position(55, 55));
-//        assertThat(position.limit(40, 45)).isEqualTo(new Position(45, 45));
-//    }
 }
